@@ -1,24 +1,53 @@
-.fundo{
+.fundo {
     width: 200vh;
     height: 100vh;
     background-color: rgb(188, 20, 255);
     align-items: center;
     display: flex;
     justify-content: center;
+    background-image: linear-gradient(to bottom, #8A2BE2, #FFD700); 
 }
 
-.drado{
+.drado {
     width: 500px;
     height: 700px;
     background-color: rgb(245, 245, 245);
-    border-radius:  20px;
+    border-radius: 20px;
     display: flex;
-    
+
 
 }
 
-.h2{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 27px;
     color: black;
     font-weight: bold;
+}
+
+h3{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(44, 44, 44);
+    font-weight: bold;
+
+}
+
+.texto {
+    padding-left: 13%;
+    line-height: 330%;
+}
+
+button{
+    width: 400px;
+    height: 50px;
+    border-radius: 15px;
+    border-style: hidden;
+    color: antiquewhite;
+    background-image: linear-gradient(to bottom, #8A2BE2, #8a3aaa); 
+
+}
+
+input{
+    border: hidden;
+    background-color: rgb(245, 245, 245);
 }
