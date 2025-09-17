@@ -1,42 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles.css" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Criar Uma Conta</title>
+  <link rel="stylesheet" href="styles.css" />
+  <href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap"
+rel="stylesheet"
+/>
+<title>Formulário</title>
 
 </head>
 
 <body>
+  
+  <div class="container">
+    <h2>Criar Uma Conta</h2>
+    <form id="formCadastro">
+      <label for="username">nome de usuário</label>
+      <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário."  />
 
-    <div class="fundo">
-        <div class="drado">
-            <div class="texto">
-                <h2>Criar Uma Conta</h2>
-                <h3>nome de usuário<br>
-                    <input placeholder="Digite seu nome de usuário.">
-                </h3>
-
-                <h3>Email<br>
-                    <input placeholder="Digite seu email.">
-                </h3>
-
-                <h3>Senha<br>
-                    <input placeholder="Digite sua senha.">
-                </h3>
-
-                <h3>Confirmação de senha<br>
-                    <input placeholder="Digite sua senha novamente">
-                </h3>
-
-                <button>Enviar</button>
-
-            </div>
+      <form id="form" class="form">
+        <div class="form-control">
+        <label for="username">Nome de usuário</label>
+        <input
+        type="text"
+        id="username"
+        placeholder="Digite seu nome de usuário..."
+        />
+        <i class="fas fa-exclamation-circle"></i>
+        <i class="fas fa-check-circle"></i>
+        <small>Mensagem de erro</small>
         </div>
+        
+      <label for="tipoPessoa">Tipo de pessoa</label>
+      <select id="tipoPessoa" name="tipoPessoa" required>
+
+        
+
+        <option value="" disabled selected>Selecione</option>
+        <option value="fisica">Pessoa física</option>
+        <option value="juridica">Pessoa jurídica</option>
+      </select>
+
+      <div id="campoCpfCnpj"></div>
+
+      <label for="senha">Senha</label>
+      <div class="input-senha">
+        <input type="password" id="senha" placeholder="Digite sua senha" />
+
     </div>
+      <label for="confirmSenha">Confirme sua senha</label>
+      <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Digite sua senha novamente" required />
+
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+  const tipoPessoa = document.getElementById('tipoPessoa');
+const campoCpfCnpj = document.getElementById('campoCpfCnpj');
+
+tipoPessoa.addEventListener('change', () => {
+  campoCpfCnpj.innerHTML = ''; 
+  if (tipoPessoa.value === 'fisica') {
+    campoCpfCnpj.innerHTML = `
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="14" required>
+    `;
+
+    const cpfInput = document.getElementById('cpf');
+    cpfInput.addEventListener('input', () => {
+      cpfInput.value = formatarCPF(cpfInput.value);
+    });
+
+  } else if (tipoPessoa.value === 'juridica') {
+    campoCpfCnpj.innerHTML = `
+      <label for="cnpj">CNPJ</label>
+      <input type="text" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ" maxlength="18" required>
+    `;
+
+    const cnpjInput = document.getElementById('cnpj');
+    cnpjInput.addEventListener('input', () => {
+      cnpjInput.value = formatarCNPJ(cnpjInput.value);
+    });
+  }
+});
+
+function formatarCPF(value) {
+  value = value.replace(/\D/g, '');
+  value = value.replace(/(\d{3})(\d)/, '$1.$2');
+  value = value.replace(/(\d{3})(\d)/, '$1.$2');
+  value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  return value;
+}
+
+function formatarCNPJ(value) {
+  value = value.replace(/\D/g, '');
+  value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+  value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+  value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+  value = value.replace(/(\d{4})(\d)/, '$1-$2');
+  return value;
+}
+
+const senhaInput = document.getElementById('senha');
+const toggleSenha = document.getElementById('toggleSenha');
+
+toggleSenha.addEventListener('click', () => {
+  if (senhaInput.type === 'password') {
+    senhaInput.type = 'text';
+    toggleSenha.textContent = 'ocultar';
+  } else {
+    senhaInput.type = 'password';
+    toggleSenha.textContent = 'mostrar';
+  }
+});
+
+</script>
 </body>
 
 </html>
